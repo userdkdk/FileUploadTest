@@ -16,7 +16,8 @@ public enum ErrorCode {
     // file extension,
     INVALID_EXTENSION_VALUE(HttpStatus.BAD_REQUEST, "F-001","Invalid extension type"),
     EXCEED_EXTENSION_COUNT(HttpStatus.BAD_REQUEST, "F-002","Cound not add extension"),
-
+    EXTENSION_NOT_FOUND(HttpStatus.NOT_FOUND, "F-003", "Extension does not found"),
+    INVALID_EXTENSION_STATUS(HttpStatus.BAD_REQUEST, "F-004", "Can not add extension"),
 
     SAMPLE(HttpStatus.UNAUTHORIZED, "S-003", "Unauthorized user access");
 

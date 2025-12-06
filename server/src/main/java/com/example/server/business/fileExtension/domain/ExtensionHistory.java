@@ -21,4 +21,8 @@ public class ExtensionHistory extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "action_type", nullable = false)
     private ActionType actionType;
+
+    public static ExtensionHistory create(FileExtension ext, ActionType action) {
+        return new ExtensionHistory(ext,action);
+    }
 }

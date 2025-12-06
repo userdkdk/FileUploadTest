@@ -28,7 +28,7 @@ public class FileExtensionController {
         return CommonResponse.create();
     }
 
-    // post file extension
+    // update file extension
     @PatchMapping("/")
     public ResponseEntity<CommonResponse<Void>> patchExtension (
             @Valid @RequestBody UpdateExtensionRequest request
