@@ -17,3 +17,7 @@ spring:
   sql:
     init:
       mode: always
+
+app:
+  domain:
+    cors-origins: http://localhost:5173

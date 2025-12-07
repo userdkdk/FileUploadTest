@@ -8,3 +8,7 @@ spring:
     properties:
       hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
     defer-datasource-initialization: true
+
+app:
+  domain:
+    cors-origins: http://localhost:5173,https://file-extension-test.vercel.app

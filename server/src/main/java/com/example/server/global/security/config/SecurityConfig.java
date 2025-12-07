@@ -1,6 +1,7 @@
 package com.example.server.global.security.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,6 +21,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    @Value("${app.domain.cors-origins}")
+    private List<String> allowedOrigins;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -29,7 +33,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(registry -> registry
                         .requestMatchers("swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/api/**").permitAll()
-                        .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .build();
@@ -39,10 +42,11 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE"));
+        configuration.setAllowedOrigins(allowedOrigins);
+        configuration.setAllowedMethods(
+                Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE"));
+        configuration.setAllowedHeaders(List.of("*"));
         configuration.setExposedHeaders(List.of("Set-Cookie"));
-        configuration.setAllowedOrigins(Arrays.asList("https://file-extension-test.vercel.app"
-                ,"118.37.109.127"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
 
