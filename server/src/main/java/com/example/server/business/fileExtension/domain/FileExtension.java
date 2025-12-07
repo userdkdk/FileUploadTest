@@ -24,12 +24,12 @@ import java.util.Locale;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FileExtension extends BaseEntity {
-    private static final int MAX_EXTENSION_LEN = 20;
+    private static final int MAX_EXTENSION_LEN = 15;
 
     @Column(name = "extension", nullable = false)
     private String extension;
 
-    @Column(name="enalbed", nullable = false)
+    @Column(name="enabled", nullable = false)
     private boolean enabled;
 
     @Column(name="built_in",nullable = false)

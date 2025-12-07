@@ -14,10 +14,10 @@ public enum ErrorCode {
     UNAUTHORIZED_ACCESS(HttpStatus.UNAUTHORIZED, "C-003", "Unauthorized user access"),
 
     // file extension,
-    INVALID_EXTENSION_VALUE(HttpStatus.BAD_REQUEST, "F-001","Invalid extension type"),
-    EXCEED_EXTENSION_COUNT(HttpStatus.BAD_REQUEST, "F-002","Cound not add extension"),
-    EXTENSION_NOT_FOUND(HttpStatus.NOT_FOUND, "F-003", "Extension does not found"),
-    INVALID_EXTENSION_STATUS(HttpStatus.BAD_REQUEST, "F-004", "Can not add extension"),
+    INVALID_EXTENSION_VALUE(HttpStatus.BAD_REQUEST, "F-001","확장자 입력값을 확인하십시오"),
+    EXCEED_EXTENSION_COUNT(HttpStatus.BAD_REQUEST, "F-002","확장자 200개 초과 입력할 수 없습니다."),
+    EXTENSION_NOT_FOUND(HttpStatus.NOT_FOUND, "F-003", "해당 확장자를 찾을 수 없습니다."),
+    INVALID_EXTENSION_STATUS(HttpStatus.BAD_REQUEST, "F-004", "이미 체크된 확장자입니다."),
 
     SAMPLE(HttpStatus.UNAUTHORIZED, "S-003", "Unauthorized user access");
 
