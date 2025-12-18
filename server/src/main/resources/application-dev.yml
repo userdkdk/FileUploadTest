@@ -23,4 +23,4 @@ spring:
 
 app:
   domain:
-    cors-origins: http://localhost:5173
+    origins: http://localhost:5173

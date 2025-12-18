@@ -14,4 +14,4 @@ spring:
 
 app:
   domain:
-    cors-origins: http://localhost:5173,https://file-extension-test.vercel.app
+    origins: http://localhost:5173,https://file-extension-test.vercel.app

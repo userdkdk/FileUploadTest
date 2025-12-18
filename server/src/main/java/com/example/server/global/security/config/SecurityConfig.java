@@ -1,5 +1,6 @@
 package com.example.server.global.security.config;
 
+import com.example.server.global.security.filter.OriginCheckFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,21 +23,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Value("${app.domain.cors-origins}")
+    @Value("${app.domain.origins}")
     private List<String> allowedOrigins;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .csrf(AbstractHttpConfigurer::disable)
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(registry -> registry
-                        .requestMatchers("swagger-ui/**", "/v3/api-docs/**").permitAll()
-                        .requestMatchers("/api/**").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .build();
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, OriginCheckFilter originCheckFilter) throws Exception {
+        http
+            .csrf(AbstractHttpConfigurer::disable)
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(registry -> registry
+                    .requestMatchers("swagger-ui/**", "/v3/api-docs/**").permitAll()
+                    .requestMatchers("/api/**").permitAll()
+                    .anyRequest().authenticated()
+            )
+            .addFilterBefore(originCheckFilter, CorsFilter.class);
+
+        return http.build();
     }
 
     @Bean
